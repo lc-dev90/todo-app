@@ -43,6 +43,10 @@ body {
   transition: transform 0.2s ease;
 }
 
+.container input[type="text"] {
+  margin-bottom: 20px;
+}
+
 .container input[type="text"]:focus {
   background-color: rgb(241, 250, 243);
   border: 1px solid rgba(117, 117, 117, 0.692);
@@ -55,4 +59,26 @@ body {
 
 .container input[type="submit"]:active {
   transform: translateY(3px);
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+li i {
+  font-size: 15px;
+  color: rgb(253, 73, 73);
+  margin-left: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  vertical-align: top;
+}
+
+li i:hover {
+  color: red;
 }
