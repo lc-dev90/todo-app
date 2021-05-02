@@ -82,3 +82,8 @@ li i {
 li i:hover {
   color: red;
 }
+
+.borda-vermelha {
+  border: 1px solid red;
+  background-color: rgb(255, 197, 197);
+}
