@@ -3,20 +3,18 @@ const submitElement = document.querySelector("#add-task");
 const todoList = document.querySelector("#todo-list");
 
 function addTask() {
-  createTask();
+  createTask(textElement.value);
   clearImput();
 }
 
-function createTask() {
+function createTask(content) {
   const listItem = document.createElement("li");
   const times = document.createElement("i");
-  const content = textElement.value;
   adicionaClasse(times);
   listItem.textContent = content;
   listItem.appendChild(times);
   todoList.appendChild(listItem);
-  const times2 = document.querySelectorAll("i");
-  times2.forEach(close);
+  saveTasks();
 }
 
 function clearImput() {
@@ -27,13 +25,34 @@ function clearImput() {
 function adicionaClasse(element) {
   element.classList.add("fas");
   element.classList.add("fa-times");
+  element.setAttribute("title", "Clear this task");
 }
 
-function close(time) {
-  time.addEventListener("click", function () {
-    time.parentElement.remove();
+function saveTasks() {
+  const tasks = todoList.querySelectorAll("li");
+  const listOfAllTaks = [];
+
+  tasks.forEach(function (task) {
+    listOfAllTaks.push(task.textContent);
+  });
+  const tasksJSON = JSON.stringify(listOfAllTaks);
+  localStorage.setItem("tasks", tasksJSON);
+}
+
+function getTasks() {
+  const tasks = localStorage.getItem("tasks");
+  const taskList = JSON.parse(tasks);
+  taskList.forEach(function (task) {
+    createTask(task);
   });
 }
+
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("fas")) {
+    e.target.parentElement.remove();
+    saveTasks();
+  }
+});
 
 textElement.addEventListener("keypress", function (e) {
   if (textElement.value !== "") {
@@ -48,3 +67,4 @@ submitElement.addEventListener("click", function () {
     addTask();
   }
 });
+getTasks();
